@@ -11,20 +11,22 @@
 	</style>
 
 	<div id="myDiv" style="height: 500px; width: 800px;"> <!-- Div that will change color -->
-		<h1 id="colorNumber"></h1> <!-- Header that will display hexcolor -->
+		<h1 id="currentHexColorHeader"></h1> <!-- Header that will display hexcolor -->
 	</div>
 
 </body>
 
 <script type="text/javascript">
+var delay = 2;  //Delay in seconds between color changes
+
 // Grab div and store in variable.
 var coloredDiv = document.getElementById("myDiv"); 
 
 // Grab header and store in variable
-var colorNum = document.getElementById("colorNumber");
+var headerTitle = document.getElementById("currentHexColorHeader");
 
 // Main function that creates random hex numbers and concatenates them.
-var colorChanger = function () {
+var getHexColor = function () {
 	var hexColor = "#";
 	for (var i = 0; i < 6; i++) {
 		var digit = Math.floor((Math.random() * 16));
@@ -48,13 +50,21 @@ var colorChanger = function () {
 		}
 		hexColor = hexColor + digit; // Concatenates digit to the hexColor
 	}
-	colorNum.innerHTML=hexColor;
 	return hexColor;
 }
 
-// Timer to change color every 1.5 seconds
+// Timer to change color based on delay time at top of script
 setInterval(function(){
-	coloredDiv.style.backgroundColor = colorChanger();},1500);
+
+	var currentHexColor = getHexColor();
+
+	//Change div background color
+	coloredDiv.style.backgroundColor = currentHexColor;
+
+	//Update color name
+	headerTitle.innerHTML= currentHexColor;
+
+},(delay*1000));
 
 </script>
 </html>
